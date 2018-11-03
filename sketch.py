@@ -5,6 +5,7 @@ import os
 import random
 
 img_path = glob("pics/*.jpg")
+
 for file in img_path:
     print(file)
     img = cv.imread(file)
@@ -23,8 +24,16 @@ for file in img_path:
     #cv.imshow("a", otsu)
     #cv.imwrite(os.path.splitext(file)[0]+str("_otsu.jpg"), otsu)
     #img[otsu == 255] = [0, 0, 255]
+    #dst = cv.stylization(blur, sigma_s=60, sigma_r=0.07)    
     thresh = cv.adaptiveThreshold(blur, 255,cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY, 15, 3)
+    kernel = np.ones((2, 2),np.uint8)
+    
+    #erosion = cv2.erode(img,kernel,iterations = 1)
+    #thresh = cv.dilate(thresh, kernel)
+    #thresh = nonMaximalSupress1(thresh, [3, 3])
+    #thresh = cv.Canny(thresh, 100, 200)
     cv.imshow("a", thresh)
+
     #print(ret)
     # max_thresh = 255
     #thresh = cv.stylization(thresh, sigma_s=60, sigma_r=0.45)
